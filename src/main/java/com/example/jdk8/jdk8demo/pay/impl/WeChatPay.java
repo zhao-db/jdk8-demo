@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * @Date 2020/9/7 11:18
  * @Version 1.0
  */
-public class ICBCPay implements Strategry {
+public class WeChatPay implements Strategry {
 
 
     /**
@@ -32,6 +32,6 @@ public class ICBCPay implements Strategry {
      */
     @Override
     public void pay(BigDecimal money) {
-        System.out.println("ICBC支付");
+        System.out.println("WeChat支付");
     }
 }

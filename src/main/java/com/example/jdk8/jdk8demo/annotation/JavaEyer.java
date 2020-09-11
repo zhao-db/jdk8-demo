@@ -4,7 +4,7 @@ package com.example.jdk8.jdk8demo.annotation;
 public class JavaEyer {
     @Name(originate = "创始人:robbin", community = "javaEye")
     public String getName() {
-        return null;
+        return "";
     }
 
     @Name(originate = "创始人:江南白衣", community = "springside")
