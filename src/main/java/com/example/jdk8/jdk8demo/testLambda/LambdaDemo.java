@@ -20,10 +20,10 @@ public class LambdaDemo {
 
         Map<String, Object> map = list.stream().collect(Collectors.toMap(User::getUsername, (x) -> x));
         System.out.println(map.toString());*/
-        lambdaMap();
+//        lambdaMap();
     }
 
-    public static void lambdaMap() {
+  /*  public static void lambdaMap() {
         User u = new User(1, "zdb", "331");
         User u1 = new User(1, "zdb1", "332");
         User u2 = new User(2, "zdb1", "332");
@@ -44,5 +44,5 @@ public class LambdaDemo {
 
         }
 
-    }
+    }*/
 }
