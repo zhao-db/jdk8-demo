@@ -1,5 +1,7 @@
 package com.example.jdk8.jdk8demo.testLambda;
 
+import com.example.jdk8.jdk8demo.pay.impl.AliPay;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -7,6 +9,12 @@ import java.util.stream.Stream;
 public class LambdaDemo {
 
     public static void main(String[] args) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("t", new User());
+        map.put("s", new AliPay());
+
+        System.out.println(map.get("t")+":"+map.get("s")+":"+map.getOrDefault("zdb","zdb"));
+
        /* List<User> list = new ArrayList<>();
         User user = new User();
         user.setPassword("sdf");
@@ -20,7 +28,7 @@ public class LambdaDemo {
 
         Map<String, Object> map = list.stream().collect(Collectors.toMap(User::getUsername, (x) -> x));
         System.out.println(map.toString());*/
-        lambdaMap();
+       // lambdaMap();
     }
 
     public static void lambdaMap() {
