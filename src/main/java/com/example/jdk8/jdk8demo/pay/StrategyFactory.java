@@ -8,10 +8,10 @@ import com.example.jdk8.jdk8demo.enums.PayEnum;
  * @Date 2020/9/8 15:39
  * @Version 1.0
  */
-public class StrategryFactory {
+public class StrategyFactory {
 
 
-    public static Strategry getStrategry(String strType) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public static Strategry getStrategy(String strType) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         String className = PayEnum.valueOf(strType).getClassName();
         return (Strategry) Class.forName(className).newInstance();
     }
