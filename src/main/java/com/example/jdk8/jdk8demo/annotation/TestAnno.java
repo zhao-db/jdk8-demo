@@ -1,10 +1,10 @@
 package com.example.jdk8.jdk8demo.annotation;
 
-import sun.reflect.Reflection;
-
 import java.lang.annotation.Annotation;
-import java.lang.ref.Reference;
 import java.lang.reflect.Method;
+
+import com.example.jdk8.jdk8demo.annotation.bean.User;
+import com.example.jdk8.jdk8demo.annotation.utils.NumberValidator;
 
 /**
  * @Description
@@ -35,8 +35,17 @@ public class TestAnno {
         return "";
     }
 
-    public static void main(String[] args) throws ClassNotFoundException {
-        TestAnno t = new TestAnno();
-        t.getAnnto();
+    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException {
+/*        TestAnno t = new TestAnno();
+        t.getAnnto();*/
+
+        User user = new User();
+        user.setAge(111);
+        user.setId(1);
+        user.setName("zhaodb");
+        user.setNickName("sdfjkl");
+        System.out.println(user.toString());
+        NumberValidator.validator(user);
+
     }
 }
