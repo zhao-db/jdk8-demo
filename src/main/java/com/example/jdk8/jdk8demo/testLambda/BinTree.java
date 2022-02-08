@@ -100,6 +100,7 @@ public class BinTree {
 
     public static void main(String[] args) {
         BinTree b = createTree(null);
+        BinTree.inOrderTree(b);
         System.out.println("b.toString() = " + JSONObject.toJSONString(b));
     }
 
