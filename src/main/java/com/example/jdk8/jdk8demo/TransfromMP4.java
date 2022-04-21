@@ -1,16 +1,8 @@
 package com.example.jdk8.jdk8demo;
 
-import java.io.File;
 import java.io.IOException;
 
-import ws.schild.jave.Encoder;
 import ws.schild.jave.EncoderException;
-import ws.schild.jave.MultimediaObject;
-import ws.schild.jave.encode.EncodingAttributes;
-import ws.schild.jave.encode.VideoAttributes;
-import ws.schild.jave.info.MultimediaInfo;
-import ws.schild.jave.info.VideoInfo;
-import ws.schild.jave.info.VideoSize;
 
 /**
  * <p>
@@ -23,7 +15,16 @@ import ws.schild.jave.info.VideoSize;
 public class TransfromMP4 {
 
     public static void main(String[] args) throws IOException, EncoderException {
-        String filePath = "C:\\Users\\dongbao.zhao\\Desktop\\taoyuan.mp4";
+        String key = "stop_OFFLINE";
+        String eqKey = "";
+        if (key.contains("_")) {
+            eqKey = key.substring(0, key.indexOf("_"));
+        }
+        System.out.println(eqKey);
+    }
+
+
+       /* String filePath = "C:\\Users\\dongbao.zhao\\Desktop\\taoyuan.mp4";
         String outFilePath = filePath.substring(0, filePath.lastIndexOf("\\"));
         File sourceFile = new File(filePath);
         String fileName = filePath.substring(filePath.lastIndexOf("\\"), filePath.lastIndexOf("."));
@@ -48,7 +49,7 @@ public class TransfromMP4 {
         // 音频转换格式类
         Encoder encoder = new Encoder();
         encoder.encode(mediaObject, targetFile, attrs);
-        System.out.println("转换已完成...");
-    }
+        System.out.println("转换已完成...");*/
+//}
 
 }

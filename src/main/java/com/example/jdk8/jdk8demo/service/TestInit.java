@@ -1,7 +1,8 @@
 package com.example.jdk8.jdk8demo.service;
 
-import com.example.jdk8.jdk8demo.testLambda.User;
 import org.springframework.stereotype.Component;
+
+import com.example.jdk8.jdk8demo.testLambda.User;
 
 @Component
 public class TestInit {

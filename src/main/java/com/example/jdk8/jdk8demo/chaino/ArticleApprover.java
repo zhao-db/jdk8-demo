@@ -14,12 +14,12 @@ public class ArticleApprover extends Approver {
     @Override
     public void deploy(Course course) {
         if (!StringUtils.isEmpty(course.getArticle())) {
-            System.out.println("含有手机" + course.getName());
+            System.out.println("含有手记" + course.getName());
             if (approver != null) {
                 approver.deploy(course);
             }
         } else {
-            System.out.println("不含手机" + course.getName());
+            System.out.println("不含手记" + course.getName());
             return;
         }
     }
