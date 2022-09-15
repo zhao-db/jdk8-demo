@@ -1,4 +1,4 @@
-package com.example.jdk8.jdk8demo.algorithm;
+package com.example.jdk8.jdk8demo.algorithm.astar;
 
 import java.util.ArrayList;
 import java.util.List;
