@@ -22,7 +22,7 @@ public class TestThreadLocal {
     }
 
     public static void main(String[] args) {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             startThread();
         }
     }
@@ -34,7 +34,7 @@ public class TestThreadLocal {
             while (flag) {
                 i++;
                 new Service1().process(i);
-                if (i > 10000) {
+                if (i > 5) {
                     flag = false;
                 }
             }

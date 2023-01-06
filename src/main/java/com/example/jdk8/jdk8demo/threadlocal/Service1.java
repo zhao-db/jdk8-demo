@@ -15,7 +15,7 @@ public class Service1 {
         User user = new User("zdb" + i);
         UserContextHolder.holder.set(user);
         Thread thread = Thread.currentThread();
-        System.out.println("thread:[" + thread.getName() + "], service1:[]" + user.getName());
+        System.out.println("thread:[" + thread.getName() + "], service1:[" + user.getName() + "]");
         new Service2().process();
     }
 
@@ -23,7 +23,7 @@ public class Service1 {
         public void process() {
             User user = UserContextHolder.holder.get();
             Thread thread = Thread.currentThread();
-            System.out.println("thread:[" + thread.getName() + "], service2:[]" + user.getName());
+            System.out.println("thread:[" + thread.getName() + "], service2:[" + user.getName() + "]");
             new Service3().process();
         }
     }
@@ -32,7 +32,7 @@ public class Service1 {
         public void process() {
             User user = UserContextHolder.holder.get();
             Thread thread = Thread.currentThread();
-            System.out.println("thread:[" + thread.getName() + "], service3:[]" + user.getName());
+            System.out.println("thread:[" + thread.getName() + "], service3:[" + user.getName() + "]");
             UserContextHolder.holder.remove();
         }
     }
