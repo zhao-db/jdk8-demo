@@ -1,8 +1,11 @@
 package com.example.jdk8.jdk8demo.annotation.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.jdk8.jdk8demo.annotation.NumberCheck;
+import com.example.jdk8.jdk8demo.annotation.ValidatorInteger;
 import com.example.jdk8.jdk8demo.annotation.bean.User;
 
 /**
@@ -18,7 +21,8 @@ import com.example.jdk8.jdk8demo.annotation.bean.User;
 public class UserController {
 
     @RequestMapping("/userinfo")
-    public String userInfo(Integer age) {
+    @ValidatorInteger
+    public String userInfo(@RequestParam("age") @NumberCheck Integer age) {
         User user = new User();
         user.setAge(age);
         user.setId(1);
