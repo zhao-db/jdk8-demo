@@ -2,7 +2,7 @@ package com.example.jdk8.jdk8demo.datastructs.sparesarray;
 
 /**
  * <p>
- *
+ *  稀疏数组
  * </p>
  *
  * @author zhaodb 2023/3/17
