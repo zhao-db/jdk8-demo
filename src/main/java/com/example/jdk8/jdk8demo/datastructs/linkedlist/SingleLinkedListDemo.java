@@ -1,9 +1,8 @@
 package com.example.jdk8.jdk8demo.datastructs.linkedlist;
 
-import lombok.Data;
-import lombok.Getter;
+import java.util.Stack;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Single;
+import lombok.Getter;
 
 /**
  * <p>
@@ -27,8 +26,9 @@ public class SingleLinkedListDemo {
         singleLinkedList.addByOrder(heroNode4);
         singleLinkedList.addByOrder(heroNode2);
         singleLinkedList.list();
-        SingleLinkedList.reserve(singleLinkedList.getHead());
-        singleLinkedList.list();
+//        SingleLinkedList.reserve(singleLinkedList.getHead());
+        SingleLinkedList.reversePrint(singleLinkedList.getHead());
+//        singleLinkedList.list();
 /*
         //测试一下 求单链表中有效节点的个数
         System.out.println("有效的节点个数=" + SingleLinkedList.getLength(singleLinkedList.getHead()));//2
@@ -213,6 +213,17 @@ class SingleLinkedList {
 
     }
 
+    public static void reversePrint(HeroNode head) {
+        HeroNode cur = head.next;
+        Stack<HeroNode> stack = new Stack<HeroNode>();
+        while (cur != null) {
+            stack.push(cur);
+            cur = cur.next;
+        }
+        while (stack.size() > 0) {
+            System.out.println("stack.pop() = " + stack.pop());
+        }
+    }
 
     public static void reverseList(HeroNode head) {
         if (head.next == null || head.next.next == null) {
