@@ -1,6 +1,9 @@
 package com.example.jdk8.jdk8demo.datastructs.linkedlist;
 
 import lombok.Data;
+import lombok.Getter;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Single;
 
 /**
  * <p>
@@ -24,17 +27,22 @@ public class SingleLinkedListDemo {
         singleLinkedList.addByOrder(heroNode4);
         singleLinkedList.addByOrder(heroNode2);
         singleLinkedList.list();
-        HeroNode newHeroNode2 = new HeroNode(2, "小卢", "玉麒麟~~~");
-        singleLinkedList.update(newHeroNode2);
+        SingleLinkedList.reserve(singleLinkedList.getHead());
         singleLinkedList.list();
-        singleLinkedList.delete(1);
-        singleLinkedList.list();
+/*
+        //测试一下 求单链表中有效节点的个数
+        System.out.println("有效的节点个数=" + SingleLinkedList.getLength(singleLinkedList.getHead()));//2
+
+        //测试一下看看是否得到了倒数第K个节点
+        HeroNode res = SingleLinkedList.findLastIndexNode(singleLinkedList.getHead(), 4);
+        System.out.println("res=" + res);*/
     }
 
 }
 
 class SingleLinkedList {
     //初始化头节点 不存放具体数据
+    @Getter
     private HeroNode head = new HeroNode(0, "", "");
 
     public void add(HeroNode heroNode) {
@@ -137,6 +145,90 @@ class SingleLinkedList {
         } else {
             System.out.println(" 删除节点不存在 ");
         }
+    }
+
+    //查找单链表中的倒数第k个结点 【新浪面试题】
+    //思路
+    //1. 编写一个方法，接收head节点，同时接收一个index
+    //2. index 表示是倒数第index个节点
+    //3. 先把链表从头到尾遍历，得到链表的总的长度 getLength
+    //4. 得到size 后，我们从链表的第一个开始遍历 (size-index)个，就可以得到
+    //5. 如果找到了，则返回该节点，否则返回null
+    public static HeroNode findLastIndexNode(HeroNode head, int index) {
+        //判断如果链表为空，返回null
+        if (head.next == null) {
+            return null;//没有找到
+        }
+        //第一个遍历得到链表的长度(节点个数)
+        int size = getLength(head);
+        //第二次遍历  size-index 位置，就是我们倒数的第K个节点
+        //先做一个index的校验
+        if (index <= 0 || index > size) {
+            return null;
+        }
+        //定义给辅助变量， for 循环定位到倒数的index
+        HeroNode cur = head.next; //3 // 3 - 1 = 2
+        for (int i = 0; i < size - index; i++) {
+            cur = cur.next;
+        }
+        return cur;
+
+    }
+
+    //方法：获取到单链表的节点的个数(如果是带头结点的链表，需求不统计头节点)
+
+    /**
+     * @param head 链表的头节点
+     * @return 返回的就是有效节点的个数
+     */
+    public static int getLength(HeroNode head) {
+        if (head.next == null) { //空链表
+            return 0;
+        }
+        int length = 0;
+        //定义一个辅助的变量, 这里我们没有统计头节点
+        HeroNode cur = head.next;
+        while (cur != null) {
+            length++;
+            cur = cur.next; //遍历
+        }
+        return length;
+    }
+
+
+    public static void reserve(HeroNode head) {
+        if (head.next == null || head.next.next == null) {
+            return;
+        }
+        HeroNode cur = head.next;
+        HeroNode next = null;
+        HeroNode reserve = new HeroNode(0, "", "");
+        while (cur != null) {
+            next = cur.next;
+            cur.next = reserve.next;
+            reserve.next = cur;
+            cur = next;
+        }
+        head.next = reserve.next;
+
+    }
+
+
+    public static void reverseList(HeroNode head) {
+        if (head.next == null || head.next.next == null) {
+            System.out.println(" 为空或只有一个节点，无需反转 ");
+            return;
+        }
+        HeroNode cur = head.next;
+        HeroNode next = null;
+        HeroNode reverse = new HeroNode(0, "", "");
+        while (cur != null) {
+            next = cur.next;
+            cur.next = reverse.next;
+            reverse.next = cur;
+            cur = next;
+        }
+        head.next = reverse.next;
     }
 
 
