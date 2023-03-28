@@ -1,4 +1,4 @@
-package com.example.jdk8.jdk8demo.datastructs.arraystack;
+package com.example.jdk8.jdk8demo.datastructs.stack;
 
 import java.util.Scanner;
 
