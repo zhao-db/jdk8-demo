@@ -1,12 +1,8 @@
 package com.example.jdk8.jdk8demo.datastructs.sort;
 
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-
 /**
  * <p>
- *
+ * 冒泡排序
  * </p>
  *
  * @author zhaodb 2023/3/30
@@ -31,7 +27,7 @@ public class BubbleSort {
 
     public static void bubbleSort(int[] array) {
         for (int i = 0; i < array.length - 1; i++) {
-            int tmp = 0;
+            int tmp;
             boolean flag = false;
             for (int j = 0; j < array.length - 1 - i; j++) {
                 if (array[j] > array[j + 1]) {
