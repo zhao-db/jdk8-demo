@@ -11,23 +11,23 @@ import java.util.List;
  * @author zhaodb 2023/3/31
  * @since 3.0.1
  */
-public class BinarySearch {
+public class InsertValueSearch {
 
     public static void main(String[] args) {
         int arr[] = {1, 8, 10, 89, 1000, 1000, 1234};
 //        int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 , 11, 12, 13,14,15,16,17,18,19,20 };
-        int index = BinarySearch(arr, 0, arr.length - 1, 1234);
+        int index = BinarySearch(arr, 0, arr.length - 1, 1);
         System.out.println("index = " + index);
-//        List<Integer> resIndexList = BinarySearch2(arr, 0, arr.length - 1, 11234);
+//        List<Integer> resIndexList = BinarySearch2(arr, 0, arr.length - 1, 1);
 //        System.out.println("resIndexList=" + resIndexList);
     }
 
     public static int BinarySearch(int[] arr, int left, int right, int search) {
-        System.out.println("hello");
+        System.out.println("hello = " );
         if (left > right) {
             return -1;
         }
-        int midIndex = (left + right) / 2;
+        int midIndex = left + (right - left) * (search - arr[left]) / (arr[right] - arr[left]);
         int midValue = arr[midIndex];
         if (search == midValue) {
             return midIndex;
