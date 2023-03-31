@@ -23,8 +23,8 @@ public class InsertValueSearch {
     }
 
     public static int BinarySearch(int[] arr, int left, int right, int search) {
-        System.out.println("hello = " );
-        if (left > right) {
+        System.out.println("hello = ");
+        if (left > right || search < arr[0] || search > arr[arr.length - 1]) {
             return -1;
         }
         int midIndex = left + (right - left) * (search - arr[left]) / (arr[right] - arr[left]);
