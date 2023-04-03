@@ -52,7 +52,11 @@ public class HashTableDemo {
                     System.out.println("请输入要查找的id");
                     id = scanner.nextInt();
                     Emp emp1 = hashTab.get(id);
-                    System.out.println("emp.name = " + emp1.name);
+                    if (emp1 != null) {
+                        System.out.println("emp.name = " + emp1.name);
+                    } else {
+                        System.out.println("未找到");
+                    }
                     break;
                 case "exit":
                     scanner.close();
