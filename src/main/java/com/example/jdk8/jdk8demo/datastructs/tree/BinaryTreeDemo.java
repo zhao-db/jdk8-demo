@@ -22,6 +22,7 @@ public class BinaryTreeDemo {
         HeroNode node5 = new HeroNode(5, "关胜");
         root.setLeft(node2);
         root.setRight(node3);
+        node2.setRight(new HeroNode(6, "武松"));
         node3.setRight(node4);
         node3.setLeft(node5);
         tree.setRoot(root);
@@ -39,7 +40,8 @@ public class BinaryTreeDemo {
 //        heroNode = tree.postOrderSearch(5);
 //        System.out.println("heroNode = " + heroNode);
         tree.preOrder();
-        tree.delNode(3);
+        tree.delNodeAndLeftUp(1);
+        System.out.println();
         tree.preOrder();
     }
 
@@ -109,6 +111,26 @@ class BinaryTree {
         root.delNode(no);
     }
 
+    public void delNodeAndLeftUp(int no) {
+        if (root == null) {
+            return;
+        }
+        if (root.getNo() == no) {
+            //需要判断要删除的左子节点 有没有子节点 如果还有子节点 则提升左子节点
+            if (root.getLeft() != null && root.getRight() != null) {
+                root.getLeft().setRight(root.getRight());
+                root = root.getLeft();
+                return;
+            }
+            if (root.getLeft() == null && root.getRight() != null) {
+                root = root.getRight();
+                return;
+            }
+            //无子树 直接删除
+            root = null;
+        }
+        root.delNodeAndLeftUp(no);
+    }
 }
 
 
@@ -244,9 +266,6 @@ class HeroNode {
      * @param no
      */
     public void delNode(int no) {
-        if (this == null) {
-            return;
-        }
         if (this.left != null && this.left.no == no) {
             this.left = null;
             return;
@@ -261,6 +280,50 @@ class HeroNode {
         if (this.right != null) {
             this.right.delNode(no);
         }
-
     }
+
+    /**
+     * 1、叶子节点直接删除
+     * 2、非叶子节点判断 有几个子节点
+     * 有两个子节点的话 左子节点替换被删除节点 只有一个子节点的话直接替换
+     *
+     * @param no
+     */
+    public void delNodeAndLeftUp(int no) {
+        //左子节点不为空并且左子节点的值是要删除的值
+        if (this.left != null && this.left.no == no) {
+            //需要判断要删除的左子节点 有没有子节点 如果还有子节点 则提升左子节点
+            if (this.left.left != null && this.left.right != null) {
+                this.left.left.right = this.left.right;
+                this.left = this.left.left;
+                return;
+            }
+            if (this.left.left == null && this.left.right != null) {
+                this.left = this.left.right;
+                return;
+            }
+            this.left = null;
+        }
+        //右子节点不为空并且右子节点的值是要删除的值
+        if (this.right != null && this.right.no == no) {
+            //需要判断要删除的右子节点 有没有子节点 如果还有子节点 则提升左子节点
+            if (this.right.left != null && this.right.right != null) {
+                this.right.left.right = this.right.right;
+                this.right = this.right.left;
+                return;
+            }
+            if (this.right.left == null && this.right.right != null) {
+                this.right = this.right.right;
+                return;
+            }
+            this.right = null;
+        }
+        if (this.left != null) {
+            this.left.delNodeAndLeftUp(no);
+        }
+        if (this.right != null) {
+            this.right.delNodeAndLeftUp(no);
+        }
+    }
+
 }
