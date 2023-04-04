@@ -32,12 +32,15 @@ public class BinaryTreeDemo {
         System.out.println("后序遍历");
         tree.postOrder();*/
 
-        HeroNode heroNode = tree.preOrderSearch(5);
-        System.out.println("heroNode = " + heroNode);
-        heroNode = tree.infixOrderSearch(5);
-        System.out.println("heroNode = " + heroNode);
-        heroNode = tree.postOrderSearch(5);
-        System.out.println("heroNode = " + heroNode);
+//        HeroNode heroNode = tree.preOrderSearch(5);
+//        System.out.println("heroNode = " + heroNode);
+//        heroNode = tree.infixOrderSearch(5);
+//        System.out.println("heroNode = " + heroNode);
+//        heroNode = tree.postOrderSearch(5);
+//        System.out.println("heroNode = " + heroNode);
+        tree.preOrder();
+        tree.delNode(3);
+        tree.preOrder();
     }
 
 }
@@ -94,6 +97,16 @@ class BinaryTree {
             return this.root.postOrderSearch(no);
         }
         return null;
+    }
+
+    public void delNode(int no) {
+        if (root == null) {
+            return;
+        }
+        if (root.getNo() == no) {
+            this.root = null;
+        }
+        root.delNode(no);
     }
 
 }
@@ -223,5 +236,31 @@ class HeroNode {
             return this;
         }
         return resNode;
+    }
+
+    /**
+     * 简单版 找到节点后直接删除 不管其是否含有左右子树
+     *
+     * @param no
+     */
+    public void delNode(int no) {
+        if (this == null) {
+            return;
+        }
+        if (this.left != null && this.left.no == no) {
+            this.left = null;
+            return;
+        }
+        if (this.right != null && this.right.no == no) {
+            this.right = null;
+            return;
+        }
+        if (this.left != null) {
+            this.left.delNode(no);
+        }
+        if (this.right != null) {
+            this.right.delNode(no);
+        }
+
     }
 }
