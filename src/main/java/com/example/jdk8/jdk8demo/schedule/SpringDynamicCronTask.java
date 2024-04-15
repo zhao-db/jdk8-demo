@@ -1,6 +1,5 @@
 package com.example.jdk8.jdk8demo.schedule;
 
-import java.util.Random;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -28,17 +27,23 @@ import com.alibaba.excel.util.StringUtils;
 @Slf4j
 public class SpringDynamicCronTask implements SchedulingConfigurer {
 
-    private static final String DEFAULT_CRON = "* * 10 * * ?";
-    private static String CRON = "* * 10 * * ?";
+    private static final String DEFAULT_CRON = "0/5 * * * * ?";
+    private static String CRON = "* 0/15 * * * ?";
     private ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1, new NamedThreadFactory("UPDATE_CRON_EXPRESS", false));
 
+    public void setCRON(String cron) {
+        CRON = cron;
+    }
 
     public SpringDynamicCronTask() {
+        log.info("1");
+    }
+
+    public void startScheduleJob() {
         executor.scheduleAtFixedRate(() -> {
-            Random random = new Random();
-            int nextInt = random.nextInt(9);
-            CRON = "0/" + nextInt + " * * * * ?";
-            log.info("cron change to: " + CRON);
+            if (!CRON.equals(DEFAULT_CRON)) {
+                log.info("cron change to: " + CRON);
+            }
         }, 0, 30, TimeUnit.SECONDS);
     }
 
