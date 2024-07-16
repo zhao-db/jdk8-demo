@@ -9,6 +9,46 @@ import java.util.concurrent.locks.ReentrantLock;
  * 公平锁 线程 123456789
  * 开始排队 第一次打印后释放
  * 第二次打印会按照排队顺序继续获取锁
+ * Thread[Thread-0,5,main]开始打印
+ * Thread[Thread-0,5,main]正在打印,需要1秒
+ * Thread[Thread-1,5,main]开始打印
+ * Thread[Thread-2,5,main]开始打印
+ * Thread[Thread-3,5,main]开始打印
+ * Thread[Thread-4,5,main]开始打印
+ * Thread[Thread-5,5,main]开始打印
+ * Thread[Thread-6,5,main]开始打印
+ * Thread[Thread-7,5,main]开始打印
+ * Thread[Thread-8,5,main]开始打印
+ * Thread[Thread-9,5,main]开始打印
+ * Thread[Thread-1,5,main]正在打印,需要4秒
+ * Thread[Thread-2,5,main]正在打印,需要3秒
+ * Thread[Thread-3,5,main]正在打印,需要3秒
+ * Thread[Thread-4,5,main]正在打印,需要1秒
+ * Thread[Thread-5,5,main]正在打印,需要4秒
+ * Thread[Thread-6,5,main]正在打印,需要3秒
+ * Thread[Thread-7,5,main]正在打印,需要2秒
+ * Thread[Thread-8,5,main]正在打印,需要3秒
+ * Thread[Thread-9,5,main]正在打印,需要3秒
+ * Thread[Thread-0,5,main]正在打印,需要3秒
+ * Thread[Thread-0,5,main]打印完成
+ * Thread[Thread-1,5,main]正在打印,需要0秒
+ * Thread[Thread-1,5,main]打印完成
+ * Thread[Thread-2,5,main]正在打印,需要1秒
+ * Thread[Thread-2,5,main]打印完成
+ * Thread[Thread-3,5,main]正在打印,需要4秒
+ * Thread[Thread-3,5,main]打印完成
+ * Thread[Thread-4,5,main]正在打印,需要4秒
+ * Thread[Thread-4,5,main]打印完成
+ * Thread[Thread-5,5,main]正在打印,需要3秒
+ * Thread[Thread-5,5,main]打印完成
+ * Thread[Thread-6,5,main]正在打印,需要4秒
+ * Thread[Thread-6,5,main]打印完成
+ * Thread[Thread-7,5,main]正在打印,需要0秒
+ * Thread[Thread-7,5,main]打印完成
+ * Thread[Thread-8,5,main]正在打印,需要0秒
+ * Thread[Thread-8,5,main]打印完成
+ * Thread[Thread-9,5,main]正在打印,需要0秒
+ * Thread[Thread-9,5,main]打印完成
  * 非公平锁
  * 第一次打印后释放尝试获取锁
  * 会直接由该线程继续持有锁连续执行两次打印
@@ -16,6 +56,46 @@ import java.util.concurrent.locks.ReentrantLock;
  * tryLock不遵循公平锁规则
  * 公平锁会频繁上下文切换 吞吐量更小
  * 非公平锁可能会有线程饥饿问题
+ * Thread[Thread-0,5,main]开始打印
+ * Thread[Thread-0,5,main]正在打印,需要3秒
+ * Thread[Thread-1,5,main]开始打印
+ * Thread[Thread-2,5,main]开始打印
+ * Thread[Thread-3,5,main]开始打印
+ * Thread[Thread-4,5,main]开始打印
+ * Thread[Thread-5,5,main]开始打印
+ * Thread[Thread-6,5,main]开始打印
+ * Thread[Thread-7,5,main]开始打印
+ * Thread[Thread-8,5,main]开始打印
+ * Thread[Thread-9,5,main]开始打印
+ * Thread[Thread-0,5,main]正在打印,需要3秒
+ * Thread[Thread-0,5,main]打印完成
+ * Thread[Thread-1,5,main]正在打印,需要1秒
+ * Thread[Thread-1,5,main]正在打印,需要9秒
+ * Thread[Thread-1,5,main]打印完成
+ * Thread[Thread-2,5,main]正在打印,需要8秒
+ * Thread[Thread-2,5,main]正在打印,需要8秒
+ * Thread[Thread-2,5,main]打印完成
+ * Thread[Thread-3,5,main]正在打印,需要3秒
+ * Thread[Thread-3,5,main]正在打印,需要0秒
+ * Thread[Thread-3,5,main]打印完成
+ * Thread[Thread-4,5,main]正在打印,需要9秒
+ * Thread[Thread-4,5,main]正在打印,需要2秒
+ * Thread[Thread-4,5,main]打印完成
+ * Thread[Thread-5,5,main]正在打印,需要4秒
+ * Thread[Thread-5,5,main]正在打印,需要2秒
+ * Thread[Thread-5,5,main]打印完成
+ * Thread[Thread-6,5,main]正在打印,需要3秒
+ * Thread[Thread-6,5,main]正在打印,需要9秒
+ * Thread[Thread-6,5,main]打印完成
+ * Thread[Thread-7,5,main]正在打印,需要0秒
+ * Thread[Thread-7,5,main]正在打印,需要0秒
+ * Thread[Thread-7,5,main]打印完成
+ * Thread[Thread-8,5,main]正在打印,需要0秒
+ * Thread[Thread-8,5,main]正在打印,需要2秒
+ * Thread[Thread-8,5,main]打印完成
+ * Thread[Thread-9,5,main]正在打印,需要3秒
+ * Thread[Thread-9,5,main]正在打印,需要0秒
+ * Thread[Thread-9,5,main]打印完成
  *
  * </p>
  *
@@ -53,12 +133,12 @@ class Job implements Runnable {
 }
 
 class PrintQueue {
-    private Lock queueLock = new ReentrantLock(false);
+    private Lock queueLock = new ReentrantLock(true);
 
     public void printLog(Object document) {
         queueLock.lock();
         try {
-            int duration = new Random().nextInt(10);
+            int duration = new Random().nextInt(5);
             System.out.println(Thread.currentThread() + "正在打印,需要" + duration + "秒");
             Thread.sleep(duration * 1000);
         } catch (InterruptedException e) {
@@ -69,7 +149,7 @@ class PrintQueue {
 
         queueLock.lock();
         try {
-            int duration = new Random().nextInt(10);
+            int duration = new Random().nextInt(5);
             System.out.println(Thread.currentThread() + "正在打印,需要" + duration + "秒");
             Thread.sleep(duration * 1000);
         } catch (InterruptedException e) {
