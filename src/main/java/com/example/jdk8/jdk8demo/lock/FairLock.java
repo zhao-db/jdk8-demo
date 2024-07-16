@@ -1,11 +1,8 @@
 package com.example.jdk8.jdk8demo.lock;
 
-import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
-import org.apache.poi.ss.formula.functions.T;
 
 /**
  * <p>
@@ -15,6 +12,8 @@ import org.apache.poi.ss.formula.functions.T;
  * 非公平锁
  * 第一次打印后释放尝试获取锁
  * 会直接由该线程继续持有锁连续执行两次打印
+ *
+ * tryLock不遵循公平锁规则
  * </p>
  *
  * @author zhaodb 2024/7/16
