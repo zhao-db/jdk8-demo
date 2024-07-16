@@ -14,6 +14,9 @@ import java.util.concurrent.locks.ReentrantLock;
  * 会直接由该线程继续持有锁连续执行两次打印
  *
  * tryLock不遵循公平锁规则
+ * 公平锁会频繁上下文切换 吞吐量更小
+ * 非公平锁可能会有线程饥饿问题
+ *
  * </p>
  *
  * @author zhaodb 2024/7/16
