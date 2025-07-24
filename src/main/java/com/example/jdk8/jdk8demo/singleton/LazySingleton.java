@@ -1,6 +1,5 @@
 package com.example.jdk8.jdk8demo.singleton;
 
-import sun.security.jca.GetInstance;
 
 /**
  * @author Collin
@@ -18,7 +17,7 @@ public class LazySingleton {
         if (lazySingleton == null) {
             synchronized (LazySingleton.class) {
                 if (lazySingleton == null) {
-                    lazySingleton= new LazySingleton();
+                    lazySingleton = new LazySingleton();
                 }
             }
         }

@@ -5,13 +5,16 @@ package com.example.jdk8.jdk8demo.testLambda;
  * @date 2021/7/7 9:40 上午
  */
 public class ArraysMath {
-
-    public static int ssdf() {
+    /**
+     * 二分查找
+     * @param t
+     * @return
+     */
+    public static int ssdf(int t) {
         int[] array = {22, 33, 44, 55, 66, 77, 88};
         int low = 0;
         int high = array.length - 1;
         int mid;
-        int t = 44;
         System.out.println("arr[high]"+array[high]);
 
         while (low <= high) {
@@ -34,7 +37,7 @@ public class ArraysMath {
         return -1;
     }
     public static void main(String[] args) {
-        ssdf();
+        ssdf(44);
 
     }
 
